@@ -5,6 +5,14 @@ In each script:
 * Configure your Contentful, spaceID, environmentID and CMA token 
 * Set up the correct contentTypesID (if needed).
 
+```javascript
+/**
+ * 1.- Set your credentials
+ */
+const spaceID = "****";
+const envID = "****";
+const accessToken = "***";
+```
 
 ## Installation
 
