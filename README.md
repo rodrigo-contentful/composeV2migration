@@ -32,6 +32,34 @@ $ node 2-copycontent.js
 $ node 3-disableComposeV1.js
 ```
 
+## Steps of migrations
+The migration to composeV2 follows the DB pattern of [expand&contract](https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern) adjusted to content models, where fields are added, content is copied and the old fields are disabled.
+
+### Recommendation on how to migrate 
+
+#### 1.- Exapand
+Former 'compose:page' fields Title, Slug, and Seo need to be copied to each one of the new compose pages.
+
+Besides adding the new fields, each new 'root' or 'start' compose v2 page, needs to be set up as a root page and the reference fields set up as composable entries (flat view on compose UX).
+For that we assign:
+
+* Assign the Contentful:AggregateRoot annotation to the content type itself
+
+* Assign the Contentful:AggregateComponent annotation to the reference field sections
+
+more information [here](https://www.contentful.com/developers/docs/references/content-management-api/#assigning-annotations)
+
+#### 2.- Migrate content
+Former 'compose:page' content for fields Title, Slug, and Seo needs to be copied to each one of the new compose pages entries.
+These new compose page entries are found by looking at the 'compose:page' field 'content', each reference entry under 'content' will become a 'root' or 'start' entry on compose V2.
+
+#### 3.- Cleanup
+
+Once new pages are marked as root, the legacy 'compose:page' content type is no longer required, we can now archive and later remove 'compose:page' entries and content Type.
+
+#### References
+For a detailed explanation and descriptions on steps, consult [Contentful guide](https://www.contentful.com/developers/docs/compose/upgrade-to-customizable-compose-content-model/)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
