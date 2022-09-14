@@ -3,15 +3,15 @@
  * https://github.com/contentful/cx-ps-cms-as-code-demo/blob/main/1-expand.js
  * Step 1.- Update pages with compose required fields and aggregations
  */
-
-const mgnt = require("contentful-management");
-
-/**
- * 1.- Set your credentials
- */
-const spaceID = "****";
-const envID = "****";
-const accessToken = "***";
+ const conf = require("./config.js");
+ const mgnt = require("contentful-management");
+ 
+ /**
+  * 1.- Set your credentials
+  */
+ const spaceID = conf.config().spaceID;
+ const envID = conf.config().envID;
+ const accessToken = conf.config().accessToken;
 
 /**
  * 2.- Define your SEO ContentTypeId, default is former compose 'seo'
@@ -37,7 +37,7 @@ async function main() {
   contentTypesCollection.items.forEach(async (currentCT) => {
     // on ech, add new compose fields (EXPAND)
     if (cTypesToUpdate.includes(currentCT.sys.id)) {
-      console.log("converting: '"+currentCT.sys.id+"'")
+      conf.loggerCTF("converting: '"+currentCT.sys.id+"'")
       
       /**
        * 4.- Make sure the next three fields IDs are correct as needed.
@@ -125,16 +125,16 @@ async function main() {
 
       currentCT.metadata = ContentTypeMetadata;
 
-      console.log("saving changes for: '"+currentCT.sys.id+"'")
+      conf.loggerCTF("saving changes for: '"+currentCT.sys.id+"'")
       // Updated the content type.
       currentCT = await currentCT.update();
 
-      console.log("publishing changes for for: '"+currentCT.sys.id+"'")
+      conf.loggerCTF("publishing changes for for: '"+currentCT.sys.id+"'")
       // Publish the content type.
       currentCT = await currentCT.publish();
 
-      console.log("...done: '"+currentCT.sys.id+"'")
-      console.log(" ")
+      conf.loggerCTF("...done: '"+currentCT.sys.id+"'")
+      conf.loggerCTF(" ")
     }
   });
 }

@@ -1,15 +1,15 @@
 /**
  * Step 2.- update new page fields
  */
-
-const mgnt = require("contentful-management");
-
-/**
- * 1.- Set your credentials
- */
- const spaceID = "****";
- const envID = "****";
- const accessToken = "***";
+ const conf = require("./config.js");
+ const mgnt = require("contentful-management");
+ 
+ /**
+  * 1.- Set your credentials
+  */
+ const spaceID = conf.config().spaceID;
+ const envID = conf.config().envID;
+ const accessToken = conf.config().accessToken;
 
 /**
  *  2.- Set former compose contentType Id, from where the fields Title,Slug and Seo will be copied.
@@ -56,7 +56,7 @@ async function main() {
         parentPage.fields.content[defaultLocale].sys.id
       );
 
-      console.log(
+      conf.loggerCTF(
         "updating '" +
           ComposePageTypeToUpdate +
           "' entry: '" +
@@ -81,7 +81,7 @@ async function main() {
         childPage.fields.compose_seo = pSeo;
       }
 
-      console.log(
+      conf.loggerCTF(
         "saving '" +
           ComposePageTypeToUpdate +
           "' changes for entry: '" +
@@ -90,7 +90,7 @@ async function main() {
       );
       childPage = await childPage.update();
 
-      console.log(
+      conf.loggerCTF(
         "publishing '" +
           ComposePageTypeToUpdate +
           "' changes for entry: '" +
@@ -99,14 +99,14 @@ async function main() {
       );
       childPage = await childPage.publish();
 
-      console.log(
+      conf.loggerCTF(
         "...done '" +
           ComposePageTypeToUpdate +
           "' entry: '" +
           childPage.sys.id +
           "'"
       );
-      console.log(" ");
+      conf.loggerCTF(" ");
     });
   });
 }
