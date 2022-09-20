@@ -13,7 +13,7 @@ This migrations focus on make "landing pages" or "compose pages" content types a
 
 After running these scripts the plan is to have the next structure, where a back refernce to the original compose:page entry added.
 
-![Compose V2 Quick & Dirty](/../composeV2Migrations/img/composeQD.jpg "Q&D")
+![Compose V2 Quick & Dirty](../img/composeQD.jpg "Q&D")
 
 ## Usage
 
