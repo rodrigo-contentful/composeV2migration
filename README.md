@@ -1,6 +1,13 @@
 # compose V2 migration
 Series of scripts to make migration to compose v2 easier.
 
+---
+
+## IMPORTANT NOTES:
+
+This migration scripts focus only on content model and entries, be aware that if your Contentful implementation use [**Tags**](https://www.contentful.com/help/tags/) for your **Compose:Page**, this **Tags** need to be assigned to the new **pages** that will become main or root on your compose view.
+
+---
 
 ## Installation
 
@@ -157,5 +164,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+### todo
+
+* The migrated pages will lose their assigned tags, that's because in the legacy content model the tags will be assigned to the entry of type Compose: Page and after the migration, this will just be a reference on the page (Compose PAGE fields), so the page loses the tags.
+* Compose PAGE fields entry must be manually added for each newly created page (extra manual work)
+* If you run the quick and dirty script on a single page type, the other page types will be removed (not deleted) from compose (it could be worth telling the client that, so if they want to use your script they have to migrate all of the page types)
+* moving the tags from entry to another one could change the result of some queries or views
+so when you search instead of getting a compose page entry you might get a Compose PAGE fields entry (if you searched by tags)
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

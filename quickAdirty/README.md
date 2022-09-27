@@ -2,6 +2,13 @@
 
 Series of scripts to make migration to compose v2 easier, by making a quick change to start working with the version2 and have time to plan a long-term migration.
 
+---
+
+## IMPORTANT NOTES:
+
+This migration scripts focus only on content model and entries, be aware that if your Contentful implementation use [**Tags**](https://www.contentful.com/help/tags/) for your **Compose:Page**, this **Tags** need to be assigned to the new **pages** that will become main or root on your compose view.
+
+---
 
 ## Installation
 
